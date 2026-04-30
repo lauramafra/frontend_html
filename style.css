@@ -1,0 +1,20 @@
+*{
+    margin: 0;/*remove margens padrão*/
+    padding: 0;/*remove espaçamento padrão*/
+}
+/*CORPO DA PÁGINA*/
+body{
+    background-color: #f0f0f0;/*cor de fundo clara para melhor leitura*/
+    font-family:  "Raleway", sans-serif;/*fonte legível e moderna*/
+    color: #672727;/*cor do texto escura para contraste*/
+    line-height: 1.6;/*espaçamento entre linhas para melhor leitura*/
+    padding: 20px;/*espaçamento interno para evitar que o conteúdo fique colado nas bordas*/
+}
+/*CONTAINER PRINCIPAL*/
+.container{
+    max-width: 1200px;/*limita a largura máxima para melhor leitura em telas grandes*/
+    margin: 0 auto;/*centraliza o container horizontalmente*/
+    background-color: #fff;/*cor de fundo branca para destacar o conteúdo*/
+    padding: 20px;/*espaçamento interno para melhor organização do conteúdo*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);/*sombra suave para dar profundidade*/
+}
