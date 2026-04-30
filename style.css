@@ -18,3 +18,20 @@ body{
     padding: 20px;/*espaçamento interno para melhor organização do conteúdo*/
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);/*sombra suave para dar profundidade*/
 }
+
+/*MENU DE NAVEGAÇÃO*/
+nav{    
+    background-color: #672727;/*cor de fundo do menu para destaque*/
+    padding: 10px;/*espaçamento interno para melhor organização dos links*/
+    display: flex;/*usa flexbox para organizar os links horizontalmente*/
+    justify-content: center;/*centraliza os links no menu*/
+}
+/*TÍTULO PRINCIPAL*/
+h1{
+    font-size: 40px;/*tamanho grande para destaque do título*/
+    border-left: 10px solid #672727;/*borda à esquerda para destacar o título*/
+    padding-left: 10px;
+    color: #672727;/*cor do título para destaque*/
+    text-align: center;/*centraliza o título*/
+    margin-bottom: 20px;/*espaçamento abaixo do título*/
+}
