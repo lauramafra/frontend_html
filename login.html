@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Cadastro Info3nk</title>
+    <link rel="stylesheet" href="login.css">
+    <!-- Link para a fonte Poppins (Google Fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link para os ícones do Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Link para o seu arquivo CSS (que criaremos a seguir) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container-principal">
+        
+        <!-- COLUNA ESQUERDA (PRETA) -->
+        <div class="coluna-esquerda">
+            <div class="logo">
+                <!-- Usando texto para simular o logo INFO3NK -->
+                <h2 class="info3nk">INFO<span class="destaque-logo">3</span>NK</h2>
+                <p class="sub-logo">TECNOLOGIA DE PONTA</p>
+            </div>
+            
+            <div class="texto-boas-vinda">
+                <h3>Bem-vindo de volta!</h3>
+                <p>Acesse sua conta agora mesmo.</p>
+            </div>
+            
+            <button class="botao-entrar">ENTRAR</button>
+            
+            <a href="#" class="esqueci-senha">Esqueci minha senha</a>
+        </div>
+        
+        <!-- COLUNA DIREITA (BRANCA/CINZA CLARO) -->
+        <div class="coluna-direita">
+            
+            <h1 class="titulo-form">Crie sua conta</h1>
+            <p class="subtitulo-form">Preencha seus dados</p>
+            
+            <form>
+                <!-- Campo NOME -->
+                <div class="grupo-input">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Nome">
+                </div>
+                
+                <!-- Campo EMAIL -->
+                <div class="grupo-input">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email">
+                </div>
+                
+                <!-- Campo SENHA -->
+                <div class="grupo-input">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Senha">
+                </div>
+                
+                <!-- Botão CADASTRAR -->
+                <button type="submit" class="botao-cadastrar">CADASTRAR</button>
+            </form>
+            
+        </div>
+        
+    </div>
+
+</body>
+</html>

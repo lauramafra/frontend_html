@@ -1,0 +1,173 @@
+/* --- RESET E ESTILOS GERAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Usando a fonte Poppins */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #efefef;
+    overflow-y: auto; /* Permite rolar a página inteira se necessário */
+    padding: 20px 0;
+}
+
+/* --- CONTÊINER PRINCIPAL (O Cartão) --- */
+.container-principal {
+    display: flex;
+    width: 900px;
+    /* Mudança importante: de height fixo para min-height */
+    min-height: 550px; 
+    height: auto; /* Deixa o container crescer se o formulário for grande */
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin: 20px; /* Adiciona uma margem para não encostar no topo/fundo da tela */
+}
+
+/* --- COLUNA ESQUERDA (PRETA) --- */
+.coluna-esquerda {
+    flex: 1; /* Ocupa metade do espaço */
+    background-color: #000; /* Fundo preto */
+    color: white;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Distribui o conteúdo verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    text-align: center;
+}
+
+/* Estilos do "Logo" simulado */
+.info3nk {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+.destaque-logo {
+    color: #fff; /* O '3' continua branco, mas se fosse uma imagem, seria diferente */
+}
+.sub-logo {
+    font-size: 0.7rem;
+    color: #aaa; /* Cinza médio */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: -5px;
+}
+
+/* Texto de Boas-vindas */
+.texto-boas-vinda h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.texto-boas-vinda p {
+    font-size: 0.9rem;
+    color: #ccc; /* Cinza claro */
+}
+
+/* Botão ENTRAR (Contorno Branco) */
+.botao-entrar {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 12px 60px;
+    border-radius: 25px; /* Cantos muito arredondados */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.botao-entrar:hover {
+    background: white;
+    color: black;
+}
+
+/* Link Esqueci minha senha */
+.esqueci-senha {
+    color: #bbb;
+    text-decoration: none;
+    font-size: 0.7rem;
+    margin-top: -15px;
+}
+.esqueci-senha:hover {
+    color: white;
+}
+
+/* --- COLUNA DIREITA (BRANCA) --- */
+.coluna-direita {
+    flex: 1;
+    padding: 40px 50px; /* Diminuí um pouco o padding para ganhar espaço */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+}
+
+/* Títulos do Formulário */
+.titulo-form {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 5px;
+}
+.subtitulo-form {
+    font-size: 1rem;
+    color: #888; /* Cinza para o subtítulo */
+    margin-bottom: 50px;
+}
+
+/* Estilização dos Campos de Entrada */
+.grupo-input {
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative; /* Para posicionar o ícone */
+}
+
+.grupo-input i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%); /* Centraliza o ícone verticalmente */
+    color: #aaa; /* Cor do ícone */
+    font-size: 1.2rem;
+}
+
+.grupo-input input {
+    width: 100%;
+    padding: 20px 20px 20px 55px; /* Espaço maior à esquerda para o ícone */
+    border: none; /* Remove todas as bordas antigas */
+    background-color: #f6f3f3; /* Fundo cinza bem clarinho */
+    font-size: 1rem;
+    color: #333;
+    outline: none; /* Remove o contorno ao clicar */
+    /* border-radius: 5px; Opcional, para uma leve curvatura no input */
+}
+
+/* Estilo do Placeholder (o texto cinza de dentro) */
+.grupo-input input::placeholder {
+    color: #bbb;
+}
+
+/* Botão CADASTRAR (Preto) */
+.botao-cadastrar {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 70%; /* Não ocupa toda a largura */
+    margin: 50px auto 0 auto; /* Centraliza e afasta dos inputs */
+    display: block;
+    border-radius: 30px; /* Bem arredondado */
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.botao-cadastrar:hover {
+    background-color: #333; /* Cinza escuro no hover */
+}
