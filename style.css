@@ -35,3 +35,130 @@ h1{
     text-align: center;/*centraliza o título*/
     margin-bottom: 20px;/*espaçamento abaixo do título*/
 }
+/*SUBTÍTULO*/
+h2{
+    color: #2563eb;/*Azul*/
+    margin-top: 20px;
+}
+
+/*SUBTÍTULO MENOR*/
+h3{
+ color: #64748b;/*Azul*/
+    margin-top: 15px;
+
+}
+
+/*PARÁGRAFOS*/
+p{
+    margin-bottom: 12px;
+}
+
+/*TEXTO EM NEGRITO*/
+strong{
+    color: #b3d3ff;/*roxo*/
+
+}
+
+/*TEXTO EM ÊNFASE (itálico)*/
+em{
+    color:#7c3aed;/*roxo*/
+}
+
+/*LINHA HORIZONTAL*/
+hr{
+    margin: 20px 0;
+}
+
+/*LINKS GERAIS*/ 
+a{
+        color: #2563eb;/*Azul*/
+
+}
+
+/*LINK AO PASSAR O MOUSE*/
+a:hover{
+    color:#f59e0b;
+}
+
+/*IMAGEM*/
+img{
+    max-width: 120px;/*Limita o tamanho*/
+    border-radius:50%;/*Deixa a imagem redonda*/
+    border:3px solid #2563eb;/*Borda azul*/
+    margin:15px 0;/*Espaço acima e abaixo*/
+}
+
+/*LISTAS*/
+ul,ol{
+    margin-left: 20px;/*Recuo da lista*/
+}
+
+/*FORMULÁRIO*/
+form{
+    background: color #d4d4d4;
+    border: 1px solid rgb(94, 94, 94);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+label{
+    font-weight: bold;/*Texto em negrito*/
+}
+
+input, textarea,select{
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(103, 103, 103);
+    border-radius: 10px;
+}
+
+button{
+    background-color:#1e40af;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover{
+    background-color: #64748b;
+}
+
+table{
+    width:100%;
+    border-collapse: collapse;/*Junta as bordas*/
+    margin-top: 20px;
+}
+
+th{
+    background-color: #1e293b;
+    color: #d4d4d4;
+    padding: 10 px;
+}
+
+td{
+    padding: 10px;
+    border: 1px solid #1e293b;
+}
+
+video, audio, iframe{
+    margin: 15px 0;
+}
+
+pre{
+    background-color: #1e293b;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+code{
+    color:#d4d4d4;
+}
+
+footer{
+    margin-top: 30px;
+    text-align: center;
+    font-size: 14px;
+}
