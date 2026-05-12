@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosso Museu de Memórias ✦</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF7F2;
+    --dusty-rose: #D4A5A5;
+    --terracotta: #C47B5A;
+    --deep-wine: #6B2D3E;
+    --warm-brown: #8B5E3C;
+    --gold: #C9A84C;
+    --sage: #7A8C6E;
+    --charcoal: #2C2416;
+    --soft-gray: #9E9689;
+    --film-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* === GRAIN OVERLAY === */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: var(--film-grain);
+    background-size: 256px 256px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    background: linear-gradient(160deg, #F0E8DC 0%, #F5EDD8 40%, #EDE0CF 100%);
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--cream));
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--soft-gray);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 9vw, 7.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--charcoal);
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.4s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--warm-brown);
+    margin-top: 1.5rem;
+    max-width: 500px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.7s;
+  }
+
+  .hero-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--soft-gray);
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.3s;
+  }
+
+  .scroll-hint span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--soft-gray);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--soft-gray), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* === SPOTIFY PLAYER === */
+  .spotify-bar {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    background: var(--charcoal);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 8px 40px rgba(44,36,22,0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    max-width: 280px;
+  }
+
+  .spotify-bar:hover { transform: translateY(-3px); }
+
+  .spotify-icon {
+    width: 36px;
+    height: 36px;
+    background: #1DB954;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .spotify-icon svg { width: 20px; height: 20px; fill: white; }
+
+  .spotify-info { flex: 1; overflow: hidden; }
+
+  .spotify-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #666;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .spotify-song {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--warm-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-style: italic;
+  }
+
+  .spotify-toggle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: #1DB954;
+    background: none;
+    border: 1px solid rgba(29,185,84,0.4);
+    border-radius: 20px;
+    padding: 3px 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .spotify-toggle:hover { background: rgba(29,185,84,0.1); }
+
+  /* === NAV === */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(139,94,60,0.12);
+    padding: 1.25rem 0;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--soft-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+
+  /* === MAIN === */
+  main { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  /* === SECTION HEADER === */
+  .section-header {
+    padding: 5rem 0 2.5rem;
+    border-top: 1px solid rgba(139,94,60,0.15);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .section-header:first-of-type { border-top: none; }
+
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--soft-gray);
+    padding-top: 0.4rem;
+  }
+
+  .section-title-group {}
+
+  .section-emoji {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--charcoal);
+    line-height: 1.15;
+  }
+
+  .section-title em { font-style: italic; color: var(--terracotta); }
+
+  .section-desc {
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--warm-brown);
+    margin-top: 0.75rem;
+    line-height: 1.7;
+  }
+
+  /* === GALLERY GRIDS === */
+  .gallery-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .gallery-grid.three-col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery-grid.asymmetric {
+    grid-template-columns: 1.6fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .gallery-grid.horizontal {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .gallery-grid.featured {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .gallery-grid.mosaic {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 200px 200px;
+  }
+
+  /* === PHOTO CARD === */
+  .photo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--warm-white);
+    cursor: pointer;
+    group: true;
+  }
+
+  .photo-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(44,36,22,0.6) 100%
+    );
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .photo-card:hover::before { opacity: 1; }
+
+  .photo-card img, .photo-card .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+    filter: sepia(15%) contrast(1.05) brightness(0.97);
+  }
+
+  .photo-card:hover img,
+  .photo-card:hover .photo-placeholder { transform: scale(1.05); }
+
+  .photo-placeholder {
+    background: linear-gradient(135deg, #E8DDD0 0%, #D4C4B0 50%, #C9B89E 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--warm-brown);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    min-height: 200px;
+  }
+
+  .photo-placeholder .ph-icon {
+    font-size: 2rem;
+    opacity: 0.6;
+  }
+
+  .photo-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 2;
+    padding: 1.5rem 1rem 0.75rem;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+  }
+
+  .photo-card:hover .photo-caption { transform: translateY(0); }
+
+  .photo-caption-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--warm-white);
+    line-height: 1.4;
+  }
+
+  .photo-caption-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: rgba(250,247,242,0.6);
+    margin-top: 0.25rem;
+  }
+
+  /* Span helpers */
+  .span-2 { grid-column: span 2; }
+  .span-row-2 { grid-row: span 2; }
+
+  /* Heights for placeholders */
+  .h-300 { min-height: 300px; }
+  .h-250 { min-height: 250px; }
+  .h-200 { min-height: 200px; }
+  .h-180 { min-height: 180px; }
+  .h-160 { min-height: 160px; }
+
+  /* === POLAROID STYLE === */
+  .polaroid-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+  }
+
+  .polaroid {
+    background: white;
+    padding: 0.75rem 0.75rem 2.5rem;
+    box-shadow: 2px 4px 20px rgba(44,36,22,0.12);
+    transform: rotate(-2deg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1;
+    min-width: 160px;
+    max-width: 220px;
+    cursor: pointer;
+  }
+
+  .polaroid:nth-child(2) { transform: rotate(1.5deg); }
+  .polaroid:nth-child(3) { transform: rotate(-0.5deg); }
+  .polaroid:nth-child(4) { transform: rotate(2deg); }
+  .polaroid:nth-child(5) { transform: rotate(-1deg); }
+
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 4px 8px 30px rgba(44,36,22,0.2);
+    z-index: 10;
+  }
+
+  .polaroid .polaroid-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    filter: sepia(20%) contrast(1.05);
+  }
+
+  .polaroid .polaroid-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #E8DDD0, #C9B89E);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    opacity: 0.7;
+  }
+
+  .polaroid-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--warm-brown);
+    text-align: center;
+    margin-top: 0.75rem;
+    display: block;
+    line-height: 1.3;
+  }
+
+  /* === VIDEO SECTION === */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .video-card {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--charcoal);
+    cursor: pointer;
+  }
+
+  .video-thumb {
+    width: 100%;
+    min-height: 220px;
+    background: linear-gradient(135deg, #2C2416 0%, #4A3728 60%, #2C2416 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .video-play-btn {
+    width: 56px;
+    height: 56px;
+    background: rgba(250,247,242,0.15);
+    border: 2px solid rgba(250,247,242,0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .video-card:hover .video-play-btn {
+    background: rgba(250,247,242,0.25);
+    transform: scale(1.1);
+  }
+
+  .video-play-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--warm-white);
+    margin-left: 3px;
+  }
+
+  .video-label {
+    padding: 0.75rem 1rem;
+    background: var(--charcoal);
+  }
+
+  .video-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--warm-white);
+  }
+
+  .video-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--soft-gray);
+    margin-top: 0.25rem;
+  }
+
+  .video-duration {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(44,36,22,0.7);
+    color: var(--warm-white);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  /* === QUOTES SECTION === */
+  .memories-wall {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 3rem 0 5rem;
+  }
+
+  .memory-note {
+    background: #FFF9F0;
+    padding: 1.5rem;
+    border-radius: 2px;
+    box-shadow: 2px 4px 16px rgba(44,36,22,0.08);
+    transform: rotate(-1deg);
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+
+  .memory-note:nth-child(2) { transform: rotate(0.8deg); background: #FFF5EC; }
+  .memory-note:nth-child(3) { transform: rotate(-0.5deg); background: #FEF8EF; }
+  .memory-note:nth-child(4) { transform: rotate(1.2deg); background: #FFF9F0; }
+  .memory-note:nth-child(5) { transform: rotate(-0.7deg); background: #FFF5EC; }
+  .memory-note:nth-child(6) { transform: rotate(0.3deg); background: #FEF8EF; }
+
+  .memory-note:hover { transform: rotate(0deg) translateY(-4px); }
+
+  .memory-note::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 12px;
+    background: rgba(201,168,76,0.5);
+    border-radius: 2px;
+  }
+
+  .memory-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    font-style: italic;
+  }
+
+  .memory-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: var(--soft-gray);
+    margin-top: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--charcoal);
+    color: var(--warm-white);
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-top: 4rem;
+  }
+
+  .footer-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--dusty-rose);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: rgba(250,247,242,0.5);
+    font-style: italic;
+  }
+
+  .footer-line {
+    width: 40px;
+    height: 1px;
+    background: var(--dusty-rose);
+    margin: 2rem auto;
+    opacity: 0.4;
+  }
+
+  .footer-mono {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.3);
+  }
+
+  /* === LIGHTBOX === */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(44,36,22,0.95);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox-inner {
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .lightbox-inner .photo-placeholder,
+  .lightbox-inner img {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .lightbox-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--warm-white);
+    margin-top: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: 1px solid rgba(250,247,242,0.3);
+    color: var(--warm-white);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+
+  .lightbox-close:hover { background: rgba(250,247,242,0.1); }
+
+  /* === DIVIDER === */
+  .ornament-divider {
+    text-align: center;
+    color: var(--soft-gray);
+    font-size: 0.9rem;
+    letter-spacing: 0.5em;
+    padding: 1.5rem 0;
+    opacity: 0.5;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.5; transform: scaleY(1); }
+    50%       { opacity: 1;   transform: scaleY(1.2); }
+  }
+
+  /* === SPOTIFY EMBED PANEL === */
+  .spotify-panel {
+    position: fixed;
+    bottom: 6.5rem;
+    right: 2rem;
+    z-index: 99;
+    width: 300px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 60px rgba(44,36,22,0.35);
+    display: none;
+    animation: fadeUp 0.3s ease;
+  }
+
+  .spotify-panel.open { display: block; }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .gallery-grid.three-col { grid-template-columns: 1fr 1fr; }
+    .gallery-grid.horizontal { grid-template-columns: 1fr 1fr; }
+    .gallery-grid.featured { grid-template-columns: 1fr; }
+    .gallery-grid.asymmetric { grid-template-columns: 1fr; }
+    .video-grid { grid-template-columns: 1fr; }
+    .memories-wall { grid-template-columns: 1fr 1fr; }
+    .polaroid-row { justify-content: center; }
+    .nav-links { display: none; }
+    .spotify-bar { max-width: 200px; }
+    .section-header { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid.three-col { grid-template-columns: 1fr; }
+    .memories-wall { grid-template-columns: 1fr; }
+  }
+
+  /* === ADD PHOTO UPLOAD BUTTON === */
+  .add-photo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid rgba(139,94,60,0.3);
+    color: var(--warm-brown);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.25rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 1.5rem 0 3rem;
+  }
+
+  .add-photo-btn:hover {
+    background: var(--warm-brown);
+    color: var(--cream);
+    border-color: var(--warm-brown);
+  }
+
+  /* === HERO FLOATING POLAROIDS === */
+  .hero-floaters {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .floater {
+    position: absolute;
+    background: white;
+    padding: 0.5rem 0.5rem 1.5rem;
+    box-shadow: 2px 4px 20px rgba(44,36,22,0.1);
+    opacity: 0;
+    animation: floatIn 1s ease forwards;
+  }
+
+  .floater-1 { top: 15%; left: 5%; transform: rotate(-6deg); animation-delay: 0.6s; }
+  .floater-2 { top: 20%; right: 4%; transform: rotate(5deg); animation-delay: 0.9s; }
+  .floater-3 { bottom: 18%; left: 8%; transform: rotate(3deg); animation-delay: 1.1s; }
+  .floater-4 { bottom: 22%; right: 6%; transform: rotate(-4deg); animation-delay: 1.3s; }
+
+  .floater-inner {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #E8DDD0, #C9B89E);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  .floater-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.65rem;
+    color: var(--warm-brown);
+    text-align: center;
+    margin-top: 0.35rem;
+    font-style: italic;
+  }
+
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(20px) rotate(var(--r, -6deg)); }
+    to   { opacity: 0.8; transform: translateY(0) rotate(var(--r, -6deg)); }
+  }
+
+  @media (max-width: 768px) {
+    .hero-floaters { display: none; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">fechar ✕</button>
+  <div class="lightbox-inner" id="lightbox-inner"></div>
+</div>
+
+<!-- ===== SPOTIFY PANEL ===== -->
+<div class="spotify-panel" id="spotify-panel">
+  <!-- Substitua o src pelo link do embed da sua playlist -->
+  <iframe
+    src="https://open.spotify.com/playlist/6XGQifM43EN1O6pCh8rk28?si=05cef962b4184254&pt=1ddae47036a09a256590bb8cbc8976e7"
+    width="300" height="380" frameborder="0"
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy">
+  </iframe>
+</div>
+
+<!-- ===== SPOTIFY BAR ===== -->
+<div class="spotify-bar" onclick="toggleSpotify()">
+  <div class="spotify-icon">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+    </svg>
+  </div>
+  <div class="spotify-info">
+    <span class="spotify-label">nossa playlist ♪</span>
+    <span class="spotify-song">As músicas de nós dois</span>
+  </div>
+  <button class="spotify-toggle" onclick="event.stopPropagation(); toggleSpotify()">▶ abrir</button>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-floaters">
+    <div class="floater floater-1">
+      <div class="floater-inner">🌊</div>
+      <p class="floater-text">praia, 2023</p>
+    </div>
+    <div class="floater floater-2">
+      <div class="floater-inner">🌅</div>
+      <p class="floater-text">pôr do sol</p>
+    </div>
+    <div class="floater floater-3">
+      <div class="floater-inner">☕</div>
+      <p class="floater-text">domingo</p>
+    </div>
+    <div class="floater floater-4">
+      <div class="floater-inner">🌿</div>
+      <p class="floater-text">viagem</p>
+    </div>
+  </div>
+
+  <p class="hero-eyebrow">✦ um lugar para guardar o que importa ✦</p>
+  <h1 class="hero-title">Nosso Museu<br>de <em>Memórias</em></h1>
+  <p class="hero-subtitle">
+    Todas as fotos esquecidas no rolo da câmera,<br>
+    os vídeos que fazem rir (e chorar),<br>
+    os momentos que nunca queremos esquecer.
+  </p>
+  <p class="hero-date">desde que a gente se encontrou &nbsp;·&nbsp; para sempre</p>
+
+  <div class="scroll-hint">
+    <span>explorar</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">✦ museu de memórias</a>
+    <ul class="nav-links">
+      <li><a href="#viagens">Viagens</a></li>
+      <li><a href="#feios-felizes">Feios & Felizes</a></li>
+      <li><a href="#dates">Dates</a></li>
+      <li><a href="#videos">Vídeos</a></li>
+      <li><a href="#bilhetinhos">Bilhetinhos</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main>
+
+  <!-- ===== NOSSAS VIAGENS ===== -->
+  <section id="viagens">
+    <div class="section-header">
+      <span class="section-number">01 —</span>
+      <div class="section-title-group">
+        <span class="section-emoji">✈️</span>
+        <h2 class="section-title">Nossas <em>Viagens</em></h2>
+        <p class="section-desc">Cada lugar que vimos juntos — mesmo que fosse a cidade do lado.</p>
+      </div>
+    </div>
+
+    <!-- Grade principal -->
+    <div class="gallery-grid featured">
+      <div class="photo-card h-350" onclick="openLightbox('📍 Nossa primeira viagem juntos — descemos para BC e andamos de patinete na beira-mar', 'Janeiro 2023')">
+        <div class="photo-placeholder h-350">
+            <img src="IMG_2197_Original.jpg" alt="Nossa viagem" class="photo-img">
+          <div class="ph-icon">🌊</div>
+        </div>
+        <div class="photo-caption">
+          <p class="photo-caption-text">Primeira viagem — aquele hotel com vista pro mar</p>
+          <p class="photo-caption-date">Jan 2023</p>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <div class="photo-card h-170" onclick="openLightbox('🗺️ Nos perdemos três vezes tentando chegar nesse restaurante. Valeu cada quilômetro.', 'Março 2023')">
+          <div class="photo-placeholder h-170">
+            <div class="ph-icon">🗺️</div>
+            <span>adicione sua foto</span>
+          </div>
+          <div class="photo-caption">
+            <p class="photo-caption-text">Nos perdemos três vezes para chegar aqui</p>
+            <p class="photo-caption-date">Mar 2023</p>
+          </div>
+        </div>
+        <div class="photo-card h-170" onclick="openLightbox('🌅 Esse pôr do sol foi tão bonito que a gente nem falou nada por uns minutos. Ficou só olhando.', 'Julho 2023')">
+          <div class="photo-placeholder h-170">
+            <div class="ph-icon">🌅</div>
+            <span>adicione sua foto</span>
+          </div>
+          <div class="photo-caption">
+            <p class="photo-caption-text">Ficamos em silêncio olhando esse pôr do sol</p>
+            <p class="photo-caption-date">Jul 2023</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Linha secundária -->
+    <div class="gallery-grid three-col" style="margin-top:1rem;">
+      <div class="photo-card h-200" onclick="openLightbox('🏖️ A praia no finzinho do dia, quando já não tem mais ninguém.', 'Dezembro 2023')">
+        <div class="photo-placeholder h-200"><div class="ph-icon">🏖️</div><span>sua foto</span></div>
+        <div class="photo-caption">
+          <p class="photo-caption-text">A praia só para nós dois no finzinho do dia</p>
+          <p class="photo-caption-date">Dez 2023</p>
+        </div>
+      </div>
+      <div class="photo-card h-200" onclick="openLightbox('⛰️ Subida cansativa, mas a vista compensou tudo. E você ficou me esperando sem reclamar.', 'Fevereiro 2024')">
+        <div class="photo-placeholder h-200"><div class="ph-icon">⛰️</div><span>sua foto</span></div>
+        <div class="photo-caption">
+          <p class="photo-caption-text">A subida mais cansativa — e a vista mais bonita</p>
+          <p class="photo-caption-date">Fev 2024</p>
+        </div>
+      </div>
+      <div class="photo-card h-200" onclick="openLightbox('🍝 Aquele restaurante pequenininho que encontramos por acaso. O melhor da viagem.', 'Maio 2024')">
+        <div class="photo-placeholder h-200"><div class="ph-icon">🍝</div><span>sua foto</span></div>
+        <div class="photo-caption">
+          <p class="photo-caption-text">O restaurante pequenininho que encontramos por acaso</p>
+          <p class="photo-caption-date">Mai 2024</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="add-photo-btn" onclick="alert('Para adicionar fotos: substitua os elementos .photo-placeholder por tags <img> com suas fotos!')">
+      + adicionar foto desta viagem
+    </button>
+  </section>
+
+  <div class="ornament-divider">· · · ✦ · · ·</div>
+
+  <!-- ===== FEIOS MAS FELIZES ===== -->
+  <section id="feios-felizes">
+    <div class="section-header">
+      <span class="section-number">02 —</span>
+      <div class="section-title-group">
+        <span class="section-emoji">😂</span>
+        <h2 class="section-title">Feios mas <em>muito felizes</em></h2>
+        <p class="section-desc">Aquelas fotos que ninguém posta mas que são as mais verdadeiras.</p>
+      </div>
+    </div>
+
+    <!-- Polaroids -->
+    <div class="polaroid-row">
+      <div class="polaroid" onclick="openLightbox('😂 Essa foto é horrível. E é uma das minhas favoritas.', 'Algum domingo aleatório')">
+        <div class="polaroid-placeholder">😂</div>
+        <span class="polaroid-label">domingo aleatório</span>
+      </div>
+      <div class="polaroid" onclick="openLightbox('🍕 Cara de pizza, olho meio fechado, sorriso largo. Perfeito.', 'Noite de pizza')">
+        <div class="polaroid-placeholder">🍕</div>
+        <span class="polaroid-label">noite de pizza</span>
+      </div>
+      <div class="polaroid" onclick="openLightbox('☀️ Aquele dia quente que a gente ficou parecendo tomate. Mas rindo muito.', 'Verão quente')">
+        <div class="polaroid-placeholder">☀️</div>
+        <span class="polaroid-label">verão quente</span>
+      </div>
+      <div class="polaroid" onclick="openLightbox('🌧️ Chuva, guarda-chuva quebrado, risos. Um dos melhores dias.', 'Chuva de surpresa')">
+        <div class="polaroid-placeholder">🌧️</div>
+        <span class="polaroid-label">chuva surpresa</span>
+      </div>
+      <div class="polaroid" onclick="openLightbox('😴 Os dois meio dormindo no sofá. Que momento.', 'Tarde preguiçosa')">
+        <div class="polaroid-placeholder">😴</div>
+        <span class="polaroid-label">tarde preguiçosa</span>
+      </div>
+    </div>
+
+    <!-- Grade secundária -->
+    <div class="gallery-grid asymmetric">
+      <div class="photo-card h-280" onclick="openLightbox('🤣 Essa foto capturou o exato momento em que algo deu muito errado. E a gente não parou de rir por meia hora.', 'O dia do imprevisto')">
+        <div class="photo-placeholder h-280"><div class="ph-icon">🤣</div><span>o dia do grande imprevisto</span></div>
+        <div class="photo-caption">
+          <p class="photo-caption-text">O exato momento em que tudo deu errado — mas a gente riu muito</p>
+          <p class="photo-caption-date">Um dia inesquecível</p>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <div class="photo-card h-130" onclick="openLightbox('💆 Cara de saindo da cama, mas feliz. Essa é a cara real do amor.', 'Manhã de sábado')">
+          <div class="photo-placeholder h-130"><div class="ph-icon">💆</div><span>manhã real</span></div>
+          <div class="photo-caption">
+            <p class="photo-caption-text">Saindo da cama — o amor real</p>
+            <p class="photo-caption-date">Manhã qualquer</p>
+          </div>
+        </div>
+        <div class="photo-card h-130" onclick="openLightbox('🎭 Essa merecia Oscar de pior foto tirada num bom momento.', 'Foto espontânea')">
+          <div class="photo-placeholder h-130"><div class="ph-icon">🎭</div><span>pose involuntária</span></div>
+          <div class="photo-caption">
+            <p class="photo-caption-text">Oscar de pior foto tirada num ótimo momento</p>
+            <p class="photo-caption-date">Sem data definida</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="add-photo-btn">+ adicionar foto constrangedora</button>
+  </section>
+
+  <div class="ornament-divider">· · · ✦ · · ·</div>
+
+  <!-- ===== NOSSOS DATES ===== -->
+  <section id="dates">
+    <div class="section-header">
+      <span class="section-number">03 —</span>
+      <div class="section-title-group">
+        <span class="section-emoji">🕯️</span>
+        <h2 class="section-title">Nossos <em>dates</em> favoritos</h2>
+        <p class="section-desc">Desde o restaurante chique até o cinema às 23h com pipoca fria.</p>
+      </div>
+    </div>
+
+    <div class="gallery-grid horizontal">
+      <div class="photo-card h-260" onclick="openLightbox('🌹 O primeiro date oficial. Eu estava nervoso(a) demais para comer direito.', 'Primeiro date')">
+        <div class="photo-placeholder h-260"><div class="ph-icon">🌹</div><span>primeiro date</span></div>
+        <div class="photo-caption">
+          <p class="photo-caption-text">O primeiro date — nervoso(a) demais para comer</p>
+          <p class="photo-caption-date">O começo de tudo</p>
+        </div>
+      </div>
+      <div class="photo-card h-260" onclick="openLightbox('🎬 Cinema às 23h, pipoca fria, filme que a gente não assistiu direito porque ficou conversando.', 'Cinema tardio')">
+        <div class="photo-placeholder h-260"><div class="ph-icon">🎬</div><span>cinema tardio</span></div>
+        <div class="photo-caption">
+          <p class="photo-caption-text">Cinema que virou só desculpa para estar junto</p>
+          <p class="photo-caption-date">Uma quinta à noite</p>
+        </div>
+      </div>
+      <div class="photo-card h-260" onclick="openLightbox('🌙 Picnic à noite no parque. Ideia maluca que ficou sendo uma das melhores memórias.', 'Picnic noturno')">
+        <div class="photo-placeholder h-260"><div class="ph-icon">🌙</div><span>picnic noturno</span></div>
+        <div class="photo-caption">
+          <p class="photo-caption-text">Picnic noturno — ideia maluca, memória perfeita</p>
+          <p class="photo-caption-date">Sexta inesquecível</p>
+        </div>
+      </div>
+      <div class="photo-card h-260" onclick="openLightbox('🍷 Jantar em casa que ficou melhor que qualquer restaurante. Vocês dois cozinhando e se atrapalhando.', 'Jantar em casa')">
+        <div class="photo-placeholder h-260"><div class="ph-icon">🍷</div><span>jantar em casa</span></div>
+        <div class="photo-caption">
+          <p class="photo-caption-text">Jantar em casa — melhor que qualquer restaurante</p>
+          <p class="photo-caption-date">Sábado perfeito</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="add-photo-btn">+ adicionar nosso próximo date</button>
+  </section>
+
+  <div class="ornament-divider">· · · ✦ · · ·</div>
+
+  <!-- ===== VÍDEOS ===== -->
+  <section id="videos">
+    <div class="section-header">
+      <span class="section-number">04 —</span>
+      <div class="section-title-group">
+        <span class="section-emoji">🎥</span>
+        <h2 class="section-title">Vídeos que a gente<br><em>nunca edita</em></h2>
+        <p class="section-desc">Aqueles 15 segundos gravados sem querer que guardam mais do que mil fotos.</p>
+      </div>
+    </div>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <span class="video-duration">0:23</span>
+        </div>
+        <div class="video-label">
+          <p class="video-title">Aquela gargalhada involuntária no restaurante</p>
+          <p class="video-date">Mar 2023 — gravado sem querer</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <span class="video-duration">1:04</span>
+        </div>
+        <div class="video-label">
+          <p class="video-title">Os dois tentando montar aquele móvel</p>
+          <p class="video-date">Jun 2023 — 3h de tentativa</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <span class="video-duration">0:47</span>
+        </div>
+        <div class="video-label">
+          <p class="video-title">Cantando no carro — a versão real</p>
+          <p class="video-date">Toda viagem longa</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <span class="video-duration">2:13</span>
+        </div>
+        <div class="video-label">
+          <p class="video-title">Dançando na cozinha sem motivo</p>
+          <p class="video-date">Um domingo qualquer de 2024</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="add-photo-btn">+ adicionar vídeo</button>
+  </section>
+
+  <div class="ornament-divider">· · · ✦ · · ·</div>
+
+  <!-- ===== BILHETINHOS / MEMÓRIAS ===== -->
+  <section id="bilhetinhos">
+    <div class="section-header">
+      <span class="section-number">05 —</span>
+      <div class="section-title-group">
+        <span class="section-emoji">💌</span>
+        <h2 class="section-title">Bilhetinhos &<br><em>memórias avulsas</em></h2>
+        <p class="section-desc">Coisas que a gente quer lembrar quando for velho(a) e saudosista.</p>
+      </div>
+    </div>
+
+    <div class="memories-wall">
+      <div class="memory-note">
+        <p class="memory-text">"Aquela vez que a gente ficou esperando a chuva passar por duas horas dentro do café e não reclamou nem um pouco."</p>
+        <p class="memory-date">uma tarde chuvosa · 2023</p>
+      </div>
+      <div class="memory-note">
+        <p class="memory-text">"A playlist que a gente ouvia naquela viagem longa. Até hoje quando toca qualquer música dela, me lembro de tudo."</p>
+        <p class="memory-date">agosto · 2023</p>
+      </div>
+      <div class="memory-note">
+        <p class="memory-text">"O jeito que você ri quando algo te pega de surpresa. Aquele riso curto antes do riso de verdade. Quero lembrar disso para sempre."</p>
+        <p class="memory-date">sempre · em todo lugar</p>
+      </div>
+      <div class="memory-note">
+        <p class="memory-text">"Acordar sem pressa num sábado e ficar conversando por horas sem sair da cama. Simples assim."</p>
+        <p class="memory-date">todos os sábados · 2024</p>
+      </div>
+      <div class="memory-note">
+        <p class="memory-text">"Aquele abraço no aeroporto que durou tempo demais. Ou de menos. Nunca sei."</p>
+        <p class="memory-date">partida e chegada · 2023</p>
+      </div>
+      <div class="memory-note">
+        <p class="memory-text">"A primeira vez que você preparou aquela receita especial. Deu errado, mas foi perfeito."</p>
+        <p class="memory-date">jantar em casa · 2022</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p class="footer-title">nosso museu nunca fecha</p>
+  <p class="footer-sub">e sempre tem nova memória para guardar.</p>
+  <div class="footer-line"></div>
+  <p class="footer-mono">feito com muito amor · para ser lembrado para sempre</p>
+</footer>
+
+<!-- ===== JS ===== -->
+<script>
+  // Lightbox
+  function openLightbox(caption, date) {
+    const lb = document.getElementById('lightbox');
+    const inner = document.getElementById('lightbox-inner');
+    inner.innerHTML = `
+      <div class="photo-placeholder" style="min-height:350px; font-size:4rem; gap:1rem; border-radius:4px;">
+        <div style="font-size:5rem;">📷</div>
+        <span style="font-size:0.7rem; letter-spacing:0.2em; color: #8B5E3C;">sua foto aqui</span>
+      </div>
+      <p class="lightbox-caption">${caption}</p>
+      <p style="font-family:'DM Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; color:rgba(250,247,242,0.4); margin-top:0.5rem;">${date}</p>
+    `;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(e) {
+    if (!e || e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox({ target: { id: 'lightbox' } });
+  });
+
+  // Spotify
+  let spotifyOpen = false;
+  function toggleSpotify() {
+    spotifyOpen = !spotifyOpen;
+    const panel = document.getElementById('spotify-panel');
+    panel.classList.toggle('open', spotifyOpen);
+    const btn = document.querySelector('.spotify-toggle');
+    btn.textContent = spotifyOpen ? '✕ fechar' : '▶ abrir';
+  }
+
+  // Intersection Observer para animações suaves
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.photo-card, .polaroid, .video-card, .memory-note').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity 0.6s ease ${i * 0.05}s, transform 0.6s ease ${i * 0.05}s`;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
