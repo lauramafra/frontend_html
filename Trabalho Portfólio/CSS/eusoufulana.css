@@ -143,28 +143,19 @@ nav ul li a:hover {
     color: #ead1a6;
 }
 
-.area-imagem {
-    max-width: 450px;
-    height: 400px;
-    position: relative;
+.foto-container {
+  width: 380px;
+  height: 480px;
+  border-radius: 24px;
+  overflow: hidden; /* faz os cantos arredondados cortarem a imagem */
 }
 
-.moldura-circular {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    /* Cor 3 para a borda da imagem */
-    border: 8px solid #b07478;
-}
-
-.moldura-circular img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.foto-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
 /*Rodapé*/
@@ -307,3 +298,215 @@ footer {
     font-size: 18px;
     font-family: "Raleway", sans-serif;
 }
+.foto2-container {
+  width: 380px;
+  height: 480px;
+  border-radius: 24px;
+  overflow: hidden; /* faz os cantos arredondados cortarem a imagem */
+}
+
+.foto2-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  display: flex;
+  align-items: center; /* centraliza verticalmente */
+  justify-content: space-between;
+  object-fit: cover;
+  object-position: 20% 20%; /* mexe horizontal e vertical */
+}
+.preco {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f5c6c6; /* cor clara para destacar no fundo bordô */
+  margin: 16px 0 12px;
+}
+
+.btn-contratar {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background-color: transparent;
+  border: 2px solid #f5c6c6;
+  color: #f5c6c6;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-contratar:hover {
+  background-color: #f5c6c6;
+  color: #6b0f2b; /* bordô escuro */
+}
+.titulo-pessoais {
+  color: #e8d5b7;
+  font-size: 1.4rem;
+  margin: 50px 0 24px;
+  text-align: center;
+}
+
+.pessoais-lista {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item-pessoal {
+  background-color: #8b1a3a;
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: #e8d5b7;
+}
+
+.pessoal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.nivel {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.iniciante     { background-color: #c9a0a0; color: #4a0e1e; }
+.intermediario { background-color: #d4a843; color: #4a0e1e; }
+.avancado      { background-color: #5a9e6f; color: #fff; }
+
+.barra-container {
+  background-color: #4a0e1e;
+  border-radius: 20px;
+  height: 8px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.barra {
+  height: 100%;
+  background-color: #e8d5b7;
+  border-radius: 20px;
+}
+.card .nivel {
+  display: block;
+  margin: 12px 0 8px;
+  text-align: center;
+}
+.pessoais-lista {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.item-pessoal {
+  background-color: #8b1a3a;
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: #e8d5b7;
+  width: 250px;
+}
+
+.pessoais-lista {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os cards pulem para a linha de baixo se faltar espaço */
+  justify-content: center; /* Centraliza os cards na tela */
+  gap: 20px; /* Espaço entre um card e outro (ajuste para ficar igual ao de cima) */
+  max-width: 1000px; /* Limite de largura para não esticarem demais em telas gigantes */
+  margin: 0 auto; /* Centraliza o container em si */
+  padding: 20px 0;
+}
+
+/* O estilo individual de cada card pessoal */
+.item-pessoal {
+  background-color: #8b1a3a; /* ATENÇÃO: Substitua pela cor exata dos cards de cima */
+  width: 250px; /* ATENÇÃO: Ajuste para a mesma largura dos cards de cima */
+  padding: 25px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px; /* Espaço entre o texto e a barra de progresso */
+  
+  /* Preparando a animação para ser suave */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ajuste interno para o texto e a tag (Ex: "Comunicação" e "Intermediário") */
+.pessoal-header {
+  display: flex;
+  flex-direction: column; /* Coloca o nome e o nível um em cima do outro, melhor para cards quadrados */
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+/* O EFEITO MÁGICO AO PASSAR O MOUSE */
+.item-pessoal:hover {
+  transform: translateY(-10px); /* Move o card 10 pixels para cima */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra para destacar que ele "levantou" */
+}
+
+/* Dica bônus: Se quiser que os cards de cima também se movam, 
+   adicione a classe deles aqui também! 
+   Exemplo: .card-profissional:hover, .item-pessoal:hover { ... } 
+*/
+/* Container que segura todos os cards de habilidades pessoais */
+.pessoais-lista {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os cards pulem para a linha de baixo se faltar espaço */
+  justify-content: center; /* Centraliza os cards na tela */
+  gap: 20px; /* Espaço entre um card e outro (ajuste para ficar igual ao de cima) */
+  max-width: 1000px; /* Limite de largura para não esticarem demais em telas gigantes */
+  margin: 0 auto; /* Centraliza o container em si */
+  padding: 20px 0;
+}
+
+/* O estilo individual de cada card pessoal */
+.item-pessoal {
+  background-color: #8b1a3a; /* ATENÇÃO: Substitua pela cor exata dos cards de cima */
+  width: 250px; /* ATENÇÃO: Ajuste para a mesma largura dos cards de cima */
+  padding: 25px 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px; /* Espaço entre o texto e a barra de progresso */
+  
+  /* Preparando a animação para ser suave */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ajuste interno para o texto e a tag (Ex: "Comunicação" e "Intermediário") */
+.pessoal-header {
+  display: flex;
+  flex-direction: column; /* Coloca o nome e o nível um em cima do outro, melhor para cards quadrados */
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+/* O EFEITO MÁGICO AO PASSAR O MOUSE */
+.item-pessoal:hover {
+  transform: translateY(-10px); /* Move o card 10 pixels para cima */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra para destacar que ele "levantou" */
+}
+
+/* Dica bônus: Se quiser que os cards de cima também se movam, 
+   adicione a classe deles aqui também! 
+   Exemplo: .card-profissional:hover, .item-pessoal:hover { ... } 
+*/
