@@ -404,109 +404,43 @@ footer {
   margin: 12px 0 8px;
   text-align: center;
 }
-.pessoais-lista {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.item-pessoal {
-  background-color: #8b1a3a;
-  border-radius: 12px;
-  padding: 16px 20px;
-  color: #e8d5b7;
-  width: 250px;
-}
-
-.pessoais-lista {
-  display: flex;
-  flex-wrap: wrap; /* Permite que os cards pulem para a linha de baixo se faltar espaço */
-  justify-content: center; /* Centraliza os cards na tela */
-  gap: 20px; /* Espaço entre um card e outro (ajuste para ficar igual ao de cima) */
-  max-width: 1000px; /* Limite de largura para não esticarem demais em telas gigantes */
-  margin: 0 auto; /* Centraliza o container em si */
-  padding: 20px 0;
-}
-
-/* O estilo individual de cada card pessoal */
-.item-pessoal {
-  background-color: #8b1a3a; /* ATENÇÃO: Substitua pela cor exata dos cards de cima */
-  width: 250px; /* ATENÇÃO: Ajuste para a mesma largura dos cards de cima */
-  padding: 25px 20px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 15px; /* Espaço entre o texto e a barra de progresso */
-  
-  /* Preparando a animação para ser suave */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Ajuste interno para o texto e a tag (Ex: "Comunicação" e "Intermediário") */
-.pessoal-header {
-  display: flex;
-  flex-direction: column; /* Coloca o nome e o nível um em cima do outro, melhor para cards quadrados */
-  align-items: center;
-  gap: 10px;
-  text-align: center;
-}
-
-/* O EFEITO MÁGICO AO PASSAR O MOUSE */
-.item-pessoal:hover {
-  transform: translateY(-10px); /* Move o card 10 pixels para cima */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra para destacar que ele "levantou" */
-}
-
-/* Dica bônus: Se quiser que os cards de cima também se movam, 
-   adicione a classe deles aqui também! 
-   Exemplo: .card-profissional:hover, .item-pessoal:hover { ... } 
-*/
 /* Container que segura todos os cards de habilidades pessoais */
 .pessoais-lista {
-  display: flex;
-  flex-wrap: wrap; /* Permite que os cards pulem para a linha de baixo se faltar espaço */
-  justify-content: center; /* Centraliza os cards na tela */
-  gap: 20px; /* Espaço entre um card e outro (ajuste para ficar igual ao de cima) */
-  max-width: 1000px; /* Limite de largura para não esticarem demais em telas gigantes */
-  margin: 0 auto; /* Centraliza o container em si */
-  padding: 20px 0;
+    display: flex;
+    flex-direction: row; /* Garante que fiquem lado a lado */
+    flex-wrap: wrap; /* Pula para a linha de baixo se faltar espaço */
+    justify-content: center;
+    gap: 30px; /* Mesmo espaçamento do grid de cima */
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
 }
 
 /* O estilo individual de cada card pessoal */
 .item-pessoal {
-  background-color: #8b1a3a; /* ATENÇÃO: Substitua pela cor exata dos cards de cima */
-  width: 250px; /* ATENÇÃO: Ajuste para a mesma largura dos cards de cima */
-  padding: 25px 20px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 15px; /* Espaço entre o texto e a barra de progresso */
-  
-  /* Preparando a animação para ser suave */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #811a2f; /* Mesma cor dos cards de cima */
+    width: 300px; /* Mesma largura dos cards de cima */
+    padding: 30px; /* Mesmo preenchimento dos cards de cima */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Mesma sombra dos cards de cima */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Ajuste interno para o texto e a tag (Ex: "Comunicação" e "Intermediário") */
 .pessoal-header {
-  display: flex;
-  flex-direction: column; /* Coloca o nome e o nível um em cima do outro, melhor para cards quadrados */
-  align-items: center;
-  gap: 10px;
-  text-align: center;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 10px;
+    text-align: center;
 }
 
-/* O EFEITO MÁGICO AO PASSAR O MOUSE */
+/* Efeito ao passar o mouse igual ao de cima */
 .item-pessoal:hover {
-  transform: translateY(-10px); /* Move o card 10 pixels para cima */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra para destacar que ele "levantou" */
+    transform: translateY(-10px);
 }
-
-/* Dica bônus: Se quiser que os cards de cima também se movam, 
-   adicione a classe deles aqui também! 
-   Exemplo: .card-profissional:hover, .item-pessoal:hover { ... } 
-*/
